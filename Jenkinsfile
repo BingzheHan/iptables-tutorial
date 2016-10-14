@@ -3,7 +3,7 @@
 node { 
     def workspace = pwd()
     stage "Download"
-    git "https://github.com/frznlogic/iptables-tutorial.git"
+    checkout scm
     sh "make clean"
 }
 
