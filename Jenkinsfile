@@ -9,8 +9,8 @@ node {
 
 node {
     stage "Images"
-    sh "make -j12 index"
-    sh "make -j12 images"
+    sh "cd ${workspace} && make -j12 index"
+    sh "cd ${workspace} && make -j12 images"
 }
 
 parallel 'pdf': {
