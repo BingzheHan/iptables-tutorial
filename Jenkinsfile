@@ -1,44 +1,34 @@
 #!/usr/bin/groovy 
 
-node { 
-    stage "Download"
-    def workspace = pwd()
-    println "${workspace}"
-    checkout scm
-    sh "make clean"
-}
-
-node {
-    stage "Images"
-    sh "cd ${workspace} && make -j4 index"
-    sh "cd ${workspace} && make -j4 images"
-}
-
 parallel 'pdf': {
     stage('PDF') {
         node {
-            sh "cd ${workspace} && make pdf"
+            checkout scm
+            sh "make pdf -j4"
         }
     }
 },
 'html': {
     stage('HTML') {
         node {
-            sh "cd ${workspace} && make html"
+            checkout scm
+            sh "make html"
         }
     }
 },
 'src': {
     stage('src') {
         node {
-            sh "cd ${workspace} && make src"
+            checkout scm
+            sh "make src"
         }
     }
 },
 'ps': {
     stage('PS') {
         node {
-            sh "cd ${workspace} && make ps"
+            checkout scm
+            sh "make ps"
         }
     }
 }
@@ -46,20 +36,18 @@ parallel 'pdf': {
 parallel 'spanish': {
     stage('Spanish') {
         node {
-            sh "cd ${workspace} && make spanish"
+            checkout scm
+            sh "make spanish"
         }
     }
 },
 'portuguese': {
     stage('Portuguese') {
         node {
+            checkout scm
+            sh "make portuguese"
             sh "cd ${workspace} && make portuguese"
         }
     }
-}
-
-node {
-    stage 'site'
-    sh "cd ${workspace} && make site"
 }
 
