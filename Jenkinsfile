@@ -3,14 +3,15 @@
 node { 
     def workspace = pwd()
     stage "Download"
+    print $workspace
     checkout scm
     sh "make clean"
 }
 
 node {
     stage "Images"
-    sh "cd ${workspace} && make -j12 index"
-    sh "cd ${workspace} && make -j12 images"
+    sh "cd ${workspace} && make -j4 index"
+    sh "cd ${workspace} && make -j4 images"
 }
 
 parallel 'pdf': {
