@@ -1,9 +1,9 @@
 #!/usr/bin/groovy 
 
 node { 
-    def workspace = pwd()
     stage "Download"
-    print $workspace
+    def workspace = pwd()
+    print ${workspace}
     checkout scm
     sh "make clean"
 }
