@@ -3,7 +3,7 @@
 node { 
     stage "Download"
     def workspace = pwd()
-    print ${workspace}
+    println "${workspace}"
     checkout scm
     sh "make clean"
 }
