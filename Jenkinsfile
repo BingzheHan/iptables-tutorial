@@ -46,7 +46,6 @@ parallel 'spanish': {
         node {
             checkout scm
             sh "make portuguese"
-            sh "cd ${workspace} && make portuguese"
         }
     }
 }
